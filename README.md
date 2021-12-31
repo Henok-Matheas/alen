@@ -3,6 +3,7 @@ Alen (አለን) is a website that assists people that are in need of medical ca
 The Websites features
 
   Customer features:
+	
     • The website lets users find prescribed medications by searching from local pharmacies databases.
     • Authentication feature:
       User sign in and sign up features
