@@ -23,7 +23,7 @@ The Websites features
   Pharmacy features:
   
     • Authentication feature: 
-      	Pharmacy registration
+				Pharmacy registration
       
     Business feature
       • Can create : A pharmacy object and medicine objects
