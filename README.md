@@ -21,6 +21,7 @@ The Websites features
       • Can delete his/her account
 
   Pharmacy features:
+  
     • Authentication feature: 
       	Pharmacy registration
       
