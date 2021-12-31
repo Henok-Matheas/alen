@@ -5,9 +5,9 @@ The Website features
   Customer features:
     • The website lets users find prescribed medications by searching from local pharmacies databases.
     • Authentication feature: 
-        User sign in and sign up features
-        User logout
-        User profile with update and delete features
+        -User sign in and sign up features
+        -User logout
+        -User profile with update and delete features
 
     • Displays the address of the chosen pharmacy (if it’s found on google maps it will display the location.)
     • Searches for medication and if found displays it’s description.
