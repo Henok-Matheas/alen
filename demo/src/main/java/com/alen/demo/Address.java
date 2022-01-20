@@ -8,12 +8,13 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import lombok.Data;
 
 @Data
 @Entity
+@Embeddable
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

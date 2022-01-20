@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <p th:text="${pharm.name}">${pharm.email}</p>
+    <p>this is the pharmacy</p>
+
+    <div th:each="med : ${medicines}">
+        <!-- <p th:text="${medicine.name}">name</p> -->
+        <p th:text="${med}">hello</p>
+        <p>hello mate</p>
+    </div>
+
+    <p th:text="${medicines}">count</p>
+    <br>
+    <div th:each="cnt : ${count}">
+        <!-- <p th:text="${medicine.name}">name</p> -->
+        <p th:text="${cnt}">hello</p>
+        <p>hello mate</p>
+    </div>
+
+    <!-- <p th:text="${medicines.name}">oy</p> -->
+
+    <div th:each="hell : ${mmm}">
+        <p>oy</p>
+    </div>
+
+</body>
+
+</html>
