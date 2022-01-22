@@ -10,10 +10,13 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import javax.persistence.Entity;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @Entity
+@AllArgsConstructor
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

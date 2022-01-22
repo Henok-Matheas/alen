@@ -8,15 +8,16 @@
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
 </head>
 <body class="text-center">
-    <p class="display-3">Your profile</p>
-    <div th:object="${user}" class="container h4 text-left m-5">
-        <div th:text="'Name: '+*{name}"></div><br>
-        <div th:text="'Email: '+*{email}"></div><br>
-        <div th:text="'Phone: '+*{phone}"></div><br>
-        <div th:text="'City: '+*{address.city}"></div><br>
-        <div th:text="'Subcity: '+*{address.subcity}"></div><br>
-        <div th:text="'House no: '+*{address.houseNo}"></div><br>
-        <div th:text="'Kebele: '+*{address.kebele}"></div><br>
+    <p class="display-3 text-primary">Your profile</p>
+    <div class="row justify-content-center">
+        <div class="col-lg-3 col-md-5 col-sm-8 container shadow border bg-light h6 text-center mt-5 p-5 m-4 min-w-300" style="border-radius: 50px;">
+            <img th:src="@{/images/userlogo.svg}" alt="" class="rounded-pill w-75">
+            <section th:object="${user}">
+                <div class="text-primary display-6" th:text="*{username}" ></div><br>
+                <div class="text-secondary h6" th:text="'Email: '+*{email}"></div><br>
+                <div class="text-secondary h6" th:text="'Phone: '+*{phone}"></div><br>
+            </section>
+        </div>
     </div>
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>

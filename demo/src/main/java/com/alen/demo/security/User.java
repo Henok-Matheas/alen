@@ -13,12 +13,13 @@ import lombok.RequiredArgsConstructor;
 import java.util.Arrays;
 import java.util.Collection;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 
 @Entity
 @Data
 @NoArgsConstructor(access=AccessLevel.PRIVATE,force=true)
 @RequiredArgsConstructor
-
+@AllArgsConstructor
 
 public class User implements UserDetails {
     private static final long serialVersionUID=1L;

@@ -7,13 +7,13 @@
     <title>login</title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
 </head>
-<body class="bg-light container">
+<body class="bg-light container" style="background-image: linear-gradient(to bottom right,#ffffff,#0275d8 );">
     <div class="container row justify-content-center align-content-center m-auto vh-100">
-        <div class="col-3 shadow p-4">
+        <div class="col-3 shadow p-4 bg-light " >
             <h1 class="display-4 text-center">Login</h1><br><br>
             <form th:action="@{/login}" method="post" >
                 <label for="email" class="form-label">Email</label>
-                <input type="email" name="Email" id="emial-input" class="form-control" placeholder="Email address"><br>
+                <input type="email" name="userName" id="emial-input" class="form-control" placeholder="Email address"><br>
                 <label for="password">Password</label>
                 <input type="password" name="password" id="password" class="form-control" placeholder="Password"><br>
                 <input type="submit" value="login" class="btn btn-primary">
