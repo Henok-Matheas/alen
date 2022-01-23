@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,17 +8,24 @@
     <title>user page</title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
 </head>
+
 <body class="text-center">
     <p class="display-3">Your profile</p>
     <div th:object="${user}" class="container h4 text-left m-5">
-        <div th:text="'Name: '+*{name}"></div><br>
-        <div th:text="'Email: '+*{email}"></div><br>
-        <div th:text="'Phone: '+*{phone}"></div><br>
-        <div th:text="'City: '+*{address.city}"></div><br>
+        <div th:text="|Name:  ${user.username}|">Name</div><br>
+        <div th:text="|Email: ${user.email}|">Email</div><br>
+        <div th:text="|Phone: ${user.phone}|">Phone</div><br>
+        <!-- <div th:text="'City: '+*{address.city}"></div><br>
         <div th:text="'Subcity: '+*{address.subcity}"></div><br>
         <div th:text="'House no: '+*{address.houseNo}"></div><br>
-        <div th:text="'Kebele: '+*{address.kebele}"></div><br>
+        <div th:text="'Kebele: '+*{address.kebele}"></div><br> -->
+    </div>
+
+    <div th:object="${pharmacy}">
+        <div th:text="|Name:  *{name}|">Name</div><br>
+        <div th:text="|Phone: *{phone}|">Phone</div><br>
     </div>
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
+
 </html>

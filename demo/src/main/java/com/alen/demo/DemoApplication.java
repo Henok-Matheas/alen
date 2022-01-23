@@ -1,7 +1,9 @@
 package com.alen.demo;
 
+// import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+// import org.springframework.context.annotation.Bean;
 
 import lombok.RequiredArgsConstructor;
 
@@ -17,7 +19,9 @@ public class DemoApplication {
 	// @Bean
 	// public CommandLineRunner dataLoad(PharmacyRepository repo) {
 	// return args -> {
-	// repo.save(new Pharmacy("FLTO", "Flour Tortilla", "++++++232323"));
+	// repo.save(
+	// new Pharmacy("FLTO", "Flour Tortilla", "password", "++++++232323"));
+	// // new Address(1L, "city", "subcity", "kebele", 123)
 	// };
 	// }
 

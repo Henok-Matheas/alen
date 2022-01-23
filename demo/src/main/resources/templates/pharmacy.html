@@ -10,22 +10,18 @@
 
 <body>
 
-    <p th:text="${pharm.name}">${pharm.email}</p>
+    <p th:text="${pharmacy.name}">${pharm.email}</p> <span><a
+            th:href="@{'/pharmacy/delete/' + ${pharmacy.id}}">Delete</a></span>
     <p>this is the pharmacy</p>
 
     <div th:each="med : ${medicines}">
         <!-- <p th:text="${medicine.name}">name</p> -->
-        <p th:text="${med}">hello</p>
+        <p th:text="${med.name}">hello</p>
         <p>hello mate</p>
     </div>
 
     <p th:text="${medicines}">count</p>
     <br>
-    <div th:each="cnt : ${count}">
-        <!-- <p th:text="${medicine.name}">name</p> -->
-        <p th:text="${cnt}">hello</p>
-        <p>hello mate</p>
-    </div>
 
     <!-- <p th:text="${medicines.name}">oy</p> -->
 

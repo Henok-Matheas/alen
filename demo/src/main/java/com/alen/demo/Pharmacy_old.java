@@ -1,15 +1,11 @@
 package com.alen.demo;
 
-import javax.persistence.CascadeType;
-
 // import javax.persistence.CascadeType;
-// import javax.persistence.Embedded;.
+// import javax.persistence.Embedded;
 
 // import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 // import javax.persistence.OneToMany;
@@ -30,22 +26,23 @@ import lombok.NoArgsConstructor;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class Pharmacy {
+public class Pharmacy_old {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @NotBlank
     @Size(min = 5, message = "Name must be at least 5 characters long")
     private String name;
 
+    private String password;
+
     private String phone;
 
-    // @OneToOne
+    // @Embedded
     // private Address address;
 
-    @OneToOne(cascade = CascadeType.REMOVE)
-    private User user;
+    @OneToOne
+    private User host;
 
     // @OneToMany(cascade = CascadeType.ALL, mappedBy = "")
     // // @Value("${some.key(1,2,3)}")
