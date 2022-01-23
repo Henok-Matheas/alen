@@ -1,6 +1,10 @@
 package com.alen.demo.security;
-import javax.persistence.CascadeType;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -8,55 +12,61 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import javax.persistence.OneToOne;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import com.alen.demo.Address;
+import com.alen.demo.Medicine;
+import com.alen.demo.Role;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import lombok.AccessLevel;
 
 import java.util.ArrayList;
-
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
-import lombok.AccessLevel;
-import com.alen.demo.Role;
-
-
-@Entity
 @Data
+@Entity
 @NoArgsConstructor(access=AccessLevel.PRIVATE,force=true)
 @RequiredArgsConstructor
-
-
-public class User implements UserDetails {
-    private static final long serialVersionUID=1L;
+public class Pharmacy implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    //@NotBlank
-   // @Size(min = 5, message = "Name must be at least 5 characters long")
     private final String username;
+
+    @NotBlank
+    @Size(min = 5, message = "Name must be at least 5 characters long")
     private final String password;
+    
 
     private final String phone;
 
-   // @NotNull
+    @NotNull
     private final String email;
-    // new
+
+    @OneToOne(
+    
+    cascade = CascadeType.ALL)
+    private final Address address;
+
+    @ManyToMany(
+    
+    cascade = CascadeType.ALL)
+    private final List<Medicine> medicines;
+    //new
     @ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Role> roles=new HashSet<>();
-    public User(String username,String password,String phone,String email,Set<Role> roles){
-        this.username=username;
-        this.password=password;
-        this.phone=phone;
-        this.email=email;
-        this.roles=roles;
-    }
+   
 
     public void addRole(Role role){
         this.roles.add(role);
@@ -92,7 +102,5 @@ public class User implements UserDetails {
     public boolean isEnabled(){
         return true;
     }
-    
-   
-  
+
 }

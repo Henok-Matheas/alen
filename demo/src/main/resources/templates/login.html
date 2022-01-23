@@ -8,15 +8,24 @@
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
 </head>
 <body class="bg-light container">
-    <div class="container row justify-content-center align-content-center m-auto vh-100">
+    
+    <div th:if="${error}">
+        Unable to login. Check your username and password.
+      </div>
+    <div class="container row justify-content-center align-content-center m-auto vh-100" style="background-image: linear-gradient(to bottom right,#ffffff,#0275d8 )">
+        
         <div class="col-3 shadow p-4">
             <h1 class="display-4 text-center">Login</h1><br><br>
             <form th:action="@{/login}" method="post" >
-                <label for="email" class="form-label">Email</label>
-                <input type="email" name="Email" id="emial-input" class="form-control" placeholder="Email address"><br>
+                <p> Click <a th:href="@{/registerUser}">here</a> to register.</p>
+                <label for="username" class="form-label">username</label>
+                <input type="text" name="username" id="username" class="form-control" placeholder="username"><br>
                 <label for="password">Password</label>
                 <input type="password" name="password" id="password" class="form-control" placeholder="Password"><br>
                 <input type="submit" value="login" class="btn btn-primary">
+                <div th:if="${error}">
+                    Unable to login. Check your username and password.
+                  </div>
             </form>
         </div>
     </div>

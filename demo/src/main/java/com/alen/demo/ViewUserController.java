@@ -1,5 +1,7 @@
 package com.alen.demo;
 
+import com.alen.demo.security.User;
+
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
