@@ -50,28 +50,58 @@
     </nav> -->
 
     <h1 class="m-3">Add posts here</h1>
-    <form method="post" th:action="@{create}" class="container w-50" th:object="${medicine}"
+    <form method="post" th:action="@{create}" class="container w-50" th:object="${pharmacy}"
         enctype="multipart/form-data">
         <div>
             <label class="form-label" for="name"> Name: </label>
             <input th:field="*{name}" type="text"
                 th:class="|form-control ${#fields.hasErrors('name')? 'is-invalid': 'is-valid'}|">
-            <span class="invalid-feedback" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name
+            <span class="invalid-feedback" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">title
                 Error</span>
         </div>
         <div>
-            <label class="form-label" for="price"> Price: </label>
-            <input th:field="*{price}" type="text"
-                th:class="|form-control ${#fields.hasErrors('price')? 'is-invalid': 'is-valid'}|"></input>
-            <span class="invalid-feedback" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Price Error</span>
+            <label class="form-label" for="phone"> Phone: </label>
+            <input th:field="*{phone}" type="tel"
+                th:class="|form-control ${#fields.hasErrors('phone')? 'is-invalid': 'is-valid'}|"></>
+            <span class="invalid-feedback" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">thyme
+                Error</span>
         </div>
+        <!-- <div>
+            <label class="form-label" for="description"> Description: </label>
+            <textarea th:field="*{description}" rows="8" type="text"
+                th:class="|form-control ${#fields.hasErrors('description')? 'is-invalid': 'is-valid'}|"></textarea>
+            <span class="invalid-feedback" th:if="${#fields.hasErrors('description')}"
+                th:errors="*{description}">description
+                Error</span>
+        </div>
+        <div>
 
-        <label class="form-label" for="goal"> Quantity: </label>
-        <input th:field="*{quantity}" type="number"
-            th:class="|form-control ${#fields.hasErrors('quantity')? 'is-invalid': 'is-valid'}|">
-        <span class="invalid-feedback" th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}">goal
-            Error</span>
+            <label class="form-label" for="goal"> Fund Amount Goal: </label>
+            <input th:field="*{goal}" type="text"
+                th:class="|form-control ${#fields.hasErrors('goal')? 'is-invalid': 'is-valid'}|">
+            <span class="invalid-feedback" th:if="${#fields.hasErrors('goal')}" th:errors="*{goal}">goal
+                Error</span>
         </div>
+        <div>
+            <label class="form-label" for="deadline"> deadline: </label>
+            <input type="text" th:field="*{deadline}"
+                th:class="|form-control ${#fields.hasErrors('deadline')? 'is-invalid': 'is-valid'}|">
+            <span class="invalid-feedback" th:if="${#fields.hasErrors('deadline')}" th:errors="*{deadline}">deadline
+                Error</span>
+        </div>
+        <div>
+
+            <label class="form-label" for="accountNumber"> Bank Account Number: </label>
+            <input th:field="*{accountNumber}" type="text"
+                th:class="|form-control ${#fields.hasErrors('accountNumber')? 'is-invalid': 'is-valid'}|">
+            <span class="invalid-feedback" th:if="${#fields.hasErrors('accountNumber')}"
+                th:errors="*{accountNumber}">ACC Num Error</span>
+        </div>
+        <div>
+
+            <input name="image" type="file" accept="image/png, image/jpeg, image/jpg"
+                title="Only .jpg, .jpeg, .png files are allowed" required>
+        </div> -->
         <input type="submit" value="Submit" class="btn btn-primary center">
 
     </form>

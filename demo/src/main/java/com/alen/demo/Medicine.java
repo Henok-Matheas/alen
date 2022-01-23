@@ -22,8 +22,8 @@ import javax.validation.constraints.Size;
 public class Medicine {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     @NotBlank
     @Size(min = 5, message = "Name must be at least 5 characters long")

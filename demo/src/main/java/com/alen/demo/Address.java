@@ -10,15 +10,18 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @Entity
 @Embeddable
+@AllArgsConstructor
 public class Address {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     @NotBlank
     @Size(min = 2, message = "City must be at least 2 characters long")
