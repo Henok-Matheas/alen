@@ -1,111 +1,61 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-
+<html lang="en">
 <head>
-    <link th:href="@{\css\bootstrap.min.css}" rel="stylesheet" />
-    <title>Alen</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add pharmacy</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
 </head>
+<body class="container bg-light">
+    <div class="row justify-content-center vh-100 align-items-center container">
+        <div class="col-7 shadow border rounded-3 row bg-light">
+            <h1 class="display-3 text-primary text-center">Add new pharmacy</h1>
+            <form th:action="@{create}" method="post" th:object="${pharmacy}" class="row justify-content-center">
+                <div class="m-1">
+                    <label class="form-label" for="name"> Name: </label><br>
+                    <input th:field="*{name}" type="text" id="name"
+                        th:class="|form-control ${#fields.hasErrors('name')? 'is-invalid': 'is-valid'}|">
+                    <span class="invalid-feedback" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">invalid name</span>
+                </div>
+                <div class="m-1">
+                    <label class="form-label" for="phone"> Phone: </label><br>
+                    <input th:field="*{phone}" type="tel" id="phone"
+                        th:class="|form-control ${#fields.hasErrors('phone')? 'is-invalid': 'is-valid'}|"></>
+                    <span class="invalid-feedback" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">invaid phone number</span>
+                </div>
+                <h2 class="display-6 text-secondary m-3">Enter the address of the pharmacy</h2>
+                <section th:object="*{address}" class="m-2">
+                    <div class="m-1">
+                        <label class="form-label" for="city"> City: </label><br>
+                        <input th:field="*{city}" type="text" id="city"
+                            th:class="|form-control ${#fields.hasErrors('city')? 'is-invalid': 'is-valid'}|"></>
+                        <span class="invalid-feedback" th:if="${#fields.hasErrors('city')}" th:errors="*{city}">invalid city name</span>
+                    </div>
+                    <div class="m-1">
+                        <label class="form-label" for="Subcity"> Subcity: </label><br>
+                        <input th:field="*{subCity}" type="text" id="Subcity"
+                            th:class="|form-control ${#fields.hasErrors('subCity')? 'is-invalid': 'is-valid'}|"></>
+                        <span class="invalid-feedback" th:if="${#fields.hasErrors('subCity')}" th:errors="*{subCity}">invalid subcity name</span>
+                    </div>
+                    <div class="m-1">
+                        <label class="form-label" for="kebele"> Kebele: </label><br>
+                        <input th:field="*{kebele}" type="text" id="kebele"
+                            th:class="|form-control ${#fields.hasErrors('kebele')? 'is-invalid': 'is-valid'}|"></>
+                        <span class="invalid-feedback" th:if="${#fields.hasErrors('kebele')}" th:errors="*{kebele}">invalid kebele no</span>
+                    </div>
+                    <div class="m-1">
+                        <label class="form-label" for="houseNo"> House number: </label><br>
+                        <input th:field="*{houseNo}" type="text" id="houseNo"
+                            th:class="|form-control ${#fields.hasErrors('houseNo')? 'is-invalid': 'is-valid'}|"></>
+                        <span class="invalid-feedback" th:if="${#fields.hasErrors('houseNo')}" th:errors="*{houseNo}">invalid house number</span>
+                    </div>
 
-<body>
-
-    <!-- <nav class="navbar navbar-expand-lg shadow-sm sticky-top navbar-light bg-light p-3" style="top: 0px;">
-
-        <a class="navbar-brand mr-auto mr-lg-0" href="#">አለን</a>
-        <form class="form-inline my-2 my-lg-0 d-flex flex-grow-1">
-            <input class="form-control  rounded-0 flex-grow-1 border-0" type="text"
-                placeholder="Search Donation Campaigns" aria-label="Search">
-            <button class="btn btn-outline-secondary rounded-0 " type="submit"><svg xmlns="http://www.w3.org/2000/svg"
-                    width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round" class="mx-3">
-                    <circle cx="10.5" cy="10.5" r="7.5"></circle>
-                    <line x1="21" y1="21" x2="15.8" y2="15.8"></line>
-                </svg>
-            </button>
-        </form>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Campaign Dashboard <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Notifications</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/login}" sec:authorize=!isAuthenticated()> Log In
-                    </a>
-                </li>
-                <li class="nav-item" sec:authorize=isAuthenticated()>
-                    <form th:action="@{/logout}" method="post">
-                        <input type="submit" class="btn btn-primary" value="Log Out">
-                    </form>
-                </li>
-            </ul>
-
+                </section>
+                <input type="submit" value="Submit" class="btn btn-primary w-25 center m-2">
+            </form>
         </div>
-    </nav> -->
-
-    <h1 class="m-3">Add posts here</h1>
-    <form method="post" th:action="@{create}" class="container w-50" th:object="${pharmacy}"
-        enctype="multipart/form-data">
-        <div>
-            <label class="form-label" for="name"> Name: </label>
-            <input th:field="*{name}" type="text"
-                th:class="|form-control ${#fields.hasErrors('name')? 'is-invalid': 'is-valid'}|">
-            <span class="invalid-feedback" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">title
-                Error</span>
-        </div>
-        <div>
-            <label class="form-label" for="phone"> Phone: </label>
-            <input th:field="*{phone}" type="tel"
-                th:class="|form-control ${#fields.hasErrors('phone')? 'is-invalid': 'is-valid'}|"></>
-            <span class="invalid-feedback" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">thyme
-                Error</span>
-        </div>
-        <!-- <div>
-            <label class="form-label" for="description"> Description: </label>
-            <textarea th:field="*{description}" rows="8" type="text"
-                th:class="|form-control ${#fields.hasErrors('description')? 'is-invalid': 'is-valid'}|"></textarea>
-            <span class="invalid-feedback" th:if="${#fields.hasErrors('description')}"
-                th:errors="*{description}">description
-                Error</span>
-        </div>
-        <div>
-
-            <label class="form-label" for="goal"> Fund Amount Goal: </label>
-            <input th:field="*{goal}" type="text"
-                th:class="|form-control ${#fields.hasErrors('goal')? 'is-invalid': 'is-valid'}|">
-            <span class="invalid-feedback" th:if="${#fields.hasErrors('goal')}" th:errors="*{goal}">goal
-                Error</span>
-        </div>
-        <div>
-            <label class="form-label" for="deadline"> deadline: </label>
-            <input type="text" th:field="*{deadline}"
-                th:class="|form-control ${#fields.hasErrors('deadline')? 'is-invalid': 'is-valid'}|">
-            <span class="invalid-feedback" th:if="${#fields.hasErrors('deadline')}" th:errors="*{deadline}">deadline
-                Error</span>
-        </div>
-        <div>
-
-            <label class="form-label" for="accountNumber"> Bank Account Number: </label>
-            <input th:field="*{accountNumber}" type="text"
-                th:class="|form-control ${#fields.hasErrors('accountNumber')? 'is-invalid': 'is-valid'}|">
-            <span class="invalid-feedback" th:if="${#fields.hasErrors('accountNumber')}"
-                th:errors="*{accountNumber}">ACC Num Error</span>
-        </div>
-        <div>
-
-            <input name="image" type="file" accept="image/png, image/jpeg, image/jpg"
-                title="Only .jpg, .jpeg, .png files are allowed" required>
-        </div> -->
-        <input type="submit" value="Submit" class="btn btn-primary center">
-
-    </form>
-    <script th:src="@{\js\bootstrap.bundle.min.js}"></script>
+    </div>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
-
 </html>

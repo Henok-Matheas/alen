@@ -5,30 +5,38 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Pharamacy</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
 </head>
 
 <body>
-
-    <p th:text="${pharmacy.name}">${pharm.email}</p> <span><a
-            th:href="@{'/pharmacy/delete/' + ${pharmacy.id}}">Delete</a></span>
-    <p>this is the pharmacy</p>
-
-    <div th:each="med : ${medicines}">
-        <!-- <p th:text="${medicine.name}">name</p> -->
-        <p th:text="${med.name}">hello</p>
-        <p>hello mate</p>
+    <div class="container text-center">
+        <div class="row jusify-content-center">
+            <div class="col-lg-3 col-md-5 container shadow border bg-light h6 text-center mt-5 p-5 m-4 min-w-300" style="border-radius: 50px;">
+                <img th:src="@{/images/pharmacyLogo.jpg}" alt="" class="rounded-pill w-75">
+                <section th:if="${pharmacy!=null}" th:object="${pharmacy}">
+                    <p th:text="'Pharamacy name: '+*{name}" class="fw-bold text-primary"></p>
+                    <p th:text="'Phone: '+*{phone}"></p>
+                    <p th:text="'City: '+*{address.city}"></p>
+                    <p th:text="'Subcity: '+*{address.subCity}"></p>
+                    <p th:text="'House no: '+*{address.houseNo}"></p>
+                    <p th:text="'Kebele: '+*{address.kebele}"></p>
+                </section>
+            </div>
+        </div>
+        <h1 th:if="${medicines!=null}" class="display-3 text-center">The medicines in the pharmacy are:</h1>
+        <div class="row justify-content-center">
+            <div th:if="${medicines!=null}" class="col-lg-3 col-md-5 container shadow border bg-light h6 text-center mt-5 p-5 m-4 min-w-300" th:each="medicine:${medicines}" style="border-radius: 50px;">
+                <img th:src="@{/images/medicineLogo.jpg}" alt="" class="rounded-pill w-75">
+                <section th:object="${medicine}">
+                    <p th:text="'Medicine name: '+*{name}" class="fw-bold text-primary"></p>
+                    <p th:text="'price: '+*{price}"></p>
+                    <p th:text="'Quantity: '+*{quantity}"></p>
+                </section>
+            </div>
+        </div>
     </div>
-
-    <p th:text="${medicines}">count</p>
-    <br>
-
-    <!-- <p th:text="${medicines.name}">oy</p> -->
-
-    <div th:each="hell : ${mmm}">
-        <p>oy</p>
-    </div>
-
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
 
 </html>

@@ -41,8 +41,8 @@ public class Pharmacy {
 
     private String phone;
 
-    // @OneToOne
-    // private Address address;
+    @OneToOne
+    private Address address;
 
     @OneToOne(cascade = CascadeType.REMOVE)
     private User user;

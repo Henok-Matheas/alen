@@ -42,8 +42,6 @@ public class User implements UserDetails {
     // @NotNull
     private final String email;
 
-    // @OneToOne
-    // private final Address address;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
