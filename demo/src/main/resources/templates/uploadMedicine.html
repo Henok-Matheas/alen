@@ -1,81 +1,40 @@
+</html>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-
+<html lang="en">
 <head>
-    <link th:href="@{\css\bootstrap.min.css}" rel="stylesheet" />
-    <title>Alen</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload medicine</title>
+    <link rel="stylesheet" th:href="/css/bootstrap.min.css">
 </head>
-
-<body>
-
-    <!-- <nav class="navbar navbar-expand-lg shadow-sm sticky-top navbar-light bg-light p-3" style="top: 0px;">
-
-        <a class="navbar-brand mr-auto mr-lg-0" href="#">አለን</a>
-        <form class="form-inline my-2 my-lg-0 d-flex flex-grow-1">
-            <input class="form-control  rounded-0 flex-grow-1 border-0" type="text"
-                placeholder="Search Donation Campaigns" aria-label="Search">
-            <button class="btn btn-outline-secondary rounded-0 " type="submit"><svg xmlns="http://www.w3.org/2000/svg"
-                    width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round" class="mx-3">
-                    <circle cx="10.5" cy="10.5" r="7.5"></circle>
-                    <line x1="21" y1="21" x2="15.8" y2="15.8"></line>
-                </svg>
-            </button>
-        </form>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Campaign Dashboard <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Notifications</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/login}" sec:authorize=!isAuthenticated()> Log In
-                    </a>
-                </li>
-                <li class="nav-item" sec:authorize=isAuthenticated()>
-                    <form th:action="@{/logout}" method="post">
-                        <input type="submit" class="btn btn-primary" value="Log Out">
-                    </form>
-                </li>
-            </ul>
-
+<body class="containter bg-light">
+    <div class="row justify-content-center align-content-center vh-100">
+        <div class="rounded shadow border-primary col-6 bg-light">
+            <h1 class="m-3 display-3 text-primary text-center m-5">Add medicine</h1>
+            <form method="post" th:action="@{create}" th:object="${medicine}"
+                enctype="multipart/form-data">
+                <div class="m-3">
+                    <label class="form-label" for="name"> Name: </label><br>
+                    <input th:field="*{name}" type="text" id="name"
+                        th:class="|form-control ${#fields.hasErrors('name')? 'is-invalid': 'is-valid'}|">
+                    <span class="invalid-feedback" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Invalid name</span>
+                </div>
+                <div class="m-3">
+                    <label class="form-label" for="price"> Price: </label><br>
+                    <input th:field="*{price}" type="text" id="price"
+                        th:class="|form-control ${#fields.hasErrors('price')? 'is-invalid': 'is-valid'}|">
+                    <span class="invalid-feedback" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Invalid price</span>
+                </div>
+                <div class="m-3">
+                    <label class="form-label" for="goal"> Quantity: </label><br>
+                    <input th:field="*{quantity}" type="number"
+                        th:class="|form-control ${#fields.hasErrors('quantity')? 'is-invalid': 'is-valid'}|">
+                    <span class="invalid-feedback" th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}">Invalid quantity</span>
+                </div>
+                <input type="submit" value="Submit" class="btn btn-primary center m-3">
+            </form>
         </div>
-    </nav> -->
-
-    <h1 class="m-3">Add posts here</h1>
-    <form method="post" th:action="@{create}" class="container w-50" th:object="${medicine}"
-        enctype="multipart/form-data">
-        <div>
-            <label class="form-label" for="name"> Name: </label>
-            <input th:field="*{name}" type="text"
-                th:class="|form-control ${#fields.hasErrors('name')? 'is-invalid': 'is-valid'}|">
-            <span class="invalid-feedback" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name
-                Error</span>
-        </div>
-        <div>
-            <label class="form-label" for="price"> Price: </label>
-            <input th:field="*{price}" type="text"
-                th:class="|form-control ${#fields.hasErrors('price')? 'is-invalid': 'is-valid'}|"></input>
-            <span class="invalid-feedback" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Price Error</span>
-        </div>
-
-        <label class="form-label" for="goal"> Quantity: </label>
-        <input th:field="*{quantity}" type="number"
-            th:class="|form-control ${#fields.hasErrors('quantity')? 'is-invalid': 'is-valid'}|">
-        <span class="invalid-feedback" th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}">goal
-            Error</span>
-        </div>
-        <input type="submit" value="Submit" class="btn btn-primary center">
-
-    </form>
-    <script th:src="@{\js\bootstrap.bundle.min.js}"></script>
+    </div>
 </body>
-
 </html>
