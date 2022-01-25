@@ -1,45 +1,35 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <title>alen</title>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body class="bg-light container">
     
-    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
-  </head>
-
-  <body>
-    <main class="form-signin mx-auto w-50">
-      <h1>Login</h1>
-
-      <div th:if="${error}">
+    <div th:if="${error}">
         Unable to login. Check your username and password.
       </div>
-
-      <p>New here? Click <a th:href="@{/registerUser}">here</a> to register.</p>
-      <form method="POST" th:action="@{/login}">
-        <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
-
-        <label class="form-label" for="username">Username</label>
-        <input
-          type="text"
-          class="form-control"
-          id="username"
-          name="username"
-          placeholder="Username"
-        />
-        <label class="form-label" for="password">Password</label>
-        <input
-          type="password"
-          class="form-control"
-          id="password"
-          name="password"
-          placeholder="Password"
-        />
-        <button class="w-100 btn btn-lg btn-primary my-2" type="submit">
-          Sign in
-        </button>
-      </form>
-    </main>
-
+    <div class="container row justify-content-center align-content-center m-auto vh-100" style="background-image: linear-gradient(to bottom right,#ffffff,#0275d8 )">
+        
+        <div class="col-3 shadow p-4">
+            <h1 class="display-4 text-center">Login</h1><br><br>
+            <form th:action="@{/login}" method="post" >
+                <p> Click <a th:href="@{/registerUser}">here</a> to register.</p>
+                <label for="username" class="form-label">username</label>
+                <input type="text" name="username" id="username" class="form-control" placeholder="username"><br>
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" class="form-control" placeholder="Password"><br>
+                <input type="submit" value="login" class="btn btn-primary">
+                
+                <div th:if="${error}">
+                    Unable to login. Check your username and password.
+                  </div>
+            </form>
+        </div>
+    </div>
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
-  </body>
+</body>
 </html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <p th:text="${model.roles}"></p> -->
+    <div sec:authorize="isAuthenticated()">
+        welcome <span sec:authentication="name">username</span>
+        &nbsp;
+        <span sec:authentication="principal.authorities"> roles</span>
+        
+        <p sec:authorize="hasAnyAuthority('ADMIN')"> IM ADMIN</p>
+       
+
+    </div>
+    <div <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <p th:text="${model.roles}"></p> -->
+    <div sec:authorize="isAuthenticated()">
+        welcome <span sec:authentication="name">username</span>
+        &nbsp;
+        <span sec:authentication="principal.authorities"> roles</span>
+        
+        <p sec:authorize="hasAnyAuthority('ADMIN')"> IM ADMIN</p>
+       
+
+    </div>
+    <div>
+        <input type="submit" value="pharmacyinfo" sec:authorize="hasAnyAuthority('PHARMACY')" />
+    </div>
+    <P sec:authorize="hasAnyAuthority('PHARMACY')">im PHRAMACY</P>
+    <P sec:authorize="hasAnyAuthority('USER')">im USER</P>
+    <p>hi</p>
+    <a sec:authorize="hasAnyAuthority('ADMIN')" th:href="@{/admin}">admin</a>
+    
+    <!-- <a sec:authorize="hasAnyAuthority('ADMIN')" th:href="@{/registerAdmin}">register admin</a>
+    <a sec:authorize="hasAnyAuthority('ADMIN')" th:href="@{/listOfUserAdmin}">list of user</a>
+    <a sec:authorize="hasAnyAuthority('ADMIN')" th:href="@{/listOfPharmacyAdmin}">list of pharmacy</a> -->
+    
+
+    
+</body>
+</html>>
+        <input type="submit" value="pharmacyinfo" sec:authorize="hasAnyAuthority('PHARMACY')" />
+    </div>
+    <P sec:authorize="hasAnyAuthority('PHARMACY')">im PHRAMACY</P>
+    <P sec:authorize="hasAnyAuthority('USER')">im USER</P>
+    <p>hi</p>
+    <a sec:authorize="hasAnyAuthority('ADMIN')" th:href="@{/admin}">admin</a>
+    
+    <!-- <a sec:authorize="hasAnyAuthority('ADMIN')" th:href="@{/registerAdmin}">register admin</a>
+    <a sec:authorize="hasAnyAuthority('ADMIN')" th:href="@{/listOfUserAdmin}">list of user</a>
+    <a sec:authorize="hasAnyAuthority('ADMIN')" th:href="@{/listOfPharmacyAdmin}">list of pharmacy</a> -->
+    
+
+    
+</body>
+</html>

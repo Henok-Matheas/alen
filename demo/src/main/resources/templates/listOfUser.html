@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  <div th:each="user:${user}">
+      <P th:text="${user.username}"></P>
+      <P th:text="${user.phone}"></P>
+      <P th:text="${user.email}"></P>
+      <a th:href="@{/updateUserAdmin/} + ${user.id}" >update user</a>
+      <a th:href="@{/deleteUserAdmin/} + ${user.id}" >delete user</a>
+
+  </div>
+
+    
+</body>
+</html>
