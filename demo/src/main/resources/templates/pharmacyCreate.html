@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,65 +7,50 @@
     <title>Add pharmacy</title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
 </head>
-
 <body class="container bg-light">
     <div class="row justify-content-center vh-100 align-items-center container">
         <div class="col-7 shadow border rounded-3 row bg-light">
             <h1 class="display-3 text-primary text-center">Add new pharmacy</h1>
-            <form th:action="@{create}" method="post" class="row justify-content-center" th:object="${pharmacy}">
-                <!-- <div th:object="${pharmacy}"> -->
-                <div class="m-1">
-                    <label class="form-label" for="name"> Name: </label><br>
-                    <input th:field="*{name}" type="text" id="name"
-                        th:class="|form-control ${#fields.hasErrors('name')? 'is-invalid': 'is-valid'}|">
-                    <span class="invalid-feedback" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">invalid
-                        name</span>
+            <form th:action="@{/pharmacy/create}" method="post" class="row justify-content-center">
+                <div th:object="${pharmacy}">
+                    <div class="m-1">
+                        <label class="form-label" for="name"> Name: </label><br>
+                        <input th:field="*{name}" type="text" id="name"
+                            th:class="|form-control ${#fields.hasErrors('name')? 'is-invalid': 'is-valid'}|">
+                    </div>
+                    <div class="m-1">
+                        <label class="form-label" for="phone"> Phone: </label><br>
+                        <input th:field="*{phone}" type="tel" id="phone"
+                            th:class="|form-control ${#fields.hasErrors('phone')? 'is-invalid': 'is-valid'}|">
+                    </div>
                 </div>
-                <div class="m-1">
-                    <label class="form-label" for="phone"> Phone: </label><br>
-                    <input th:field="*{phone}" type="tel" id="phone"
-                        th:class="|form-control ${#fields.hasErrors('phone')? 'is-invalid': 'is-valid'}|">
-                    <span class="invalid-feedback" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">invaid
-                        phone number</span>
-                </div>
-                <!-- </div> -->
-                <!-- <h2 class="display-6 text-secondary m-3">Enter the address of the pharmacy</h2>
-                <section th:object="${address}" class="m-2">
+                <div th:object="${address}">
+                    <h2 class="display-6 text-secondary m-3">Enter the address of the pharmacy</h2>
                     <div class="m-1">
                         <label class="form-label" for="city"> City: </label><br>
                         <input th:field="*{city}" type="text" id="city"
-                            th:class="|form-control ${#fields.hasErrors('address.city')? 'is-invalid': 'is-valid'}|">
-                        <span class="invalid-feedback" th:if="${#fields.hasErrors('city')}" th:errors="*{city}">invalid
-                            city name</span>
+                        th:class="|form-control ${#fields.hasErrors('city')? 'is-invalid': 'is-valid'}|">
                     </div>
                     <div class="m-1">
                         <label class="form-label" for="Subcity"> Subcity: </label><br>
                         <input th:field="*{subCity}" type="text" id="Subcity"
-                            th:class="|form-control ${#fields.hasErrors('subCity')? 'is-invalid': 'is-valid'}|">
-                        <span class="invalid-feedback" th:if="${#fields.hasErrors('subCity')}"
-                            th:errors="*{subCity}">invalid subcity name</span>
+                        th:class="|form-control ${#fields.hasErrors('subCity')? 'is-invalid': 'is-valid'}|">
                     </div>
                     <div class="m-1">
                         <label class="form-label" for="kebele"> Kebele: </label><br>
                         <input th:field="*{kebele}" type="text" id="kebele"
-                            th:class="|form-control ${#fields.hasErrors('kebele')? 'is-invalid': 'is-valid'}|">
-                        <span class="invalid-feedback" th:if="${#fields.hasErrors('kebele')}"
-                            th:errors="*{kebele}">invalid kebele no</span>
+                        th:class="|form-control ${#fields.hasErrors('kebele')? 'is-invalid': 'is-valid'}|">
                     </div>
                     <div class="m-1">
                         <label class="form-label" for="houseNo"> House number: </label><br>
                         <input th:field="*{houseNo}" type="text" id="houseNo"
-                            th:class="|form-control ${#fields.hasErrors('houseNo')? 'is-invalid': 'is-valid'}|">
-                        <span class="invalid-feedback" th:if="${#fields.hasErrors('houseNo')}"
-                            th:errors="*{houseNo}">invalid house number</span>
+                        th:class="|form-control ${#fields.hasErrors('houseNo')? 'is-invalid': 'is-valid'}|">
                     </div>
-
-                </section> -->
+                </div>    
                 <input type="submit" value="Submit" class="btn btn-primary w-25 center m-2">
             </form>
         </div>
     </div>
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
-
 </html>

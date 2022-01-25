@@ -10,14 +10,8 @@
 <body>
     <div class="bg-primary container-fluid" style="background-image: linear-gradient(to bottom right,#ffffff,#0275d8 )">
         <div class="row justify-content-end p-3">
-            <a th:href="@{/login}" class="btn btn-secondary col-1">login</a>
-            <div class="dropdown col-1">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">sign up</button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                  <li><a class="dropdown-item" th:href="@{/registerUser}">User</a></li>
-                  <li><a class="dropdown-item" th:href="@{/registerPharmacy}">Pharmacy</a></li>
-                </ul>
-            </div>
+            <a th:href="@{/login}" class="btn btn-secondary col-1 m-2">login</a>
+            <a class="btn btn-secondary col-1 m-2" th:href="@{/registerUser}">Register</a>
         </div>
         <div class="row justify-content-center align-content-center vh-100">
             <div class="col-4">
@@ -25,8 +19,8 @@
                 <h2 class="display-4">pharmacy locator</h2>
                 <p class="h4">Your supporter in the time of need.</p>
             </div>
-            <div class="col-4 display-6 border-start border-5 border-secondary">
-                <h1>Alen is pharmacy locator that enables you to locate a pharmcy where the medicine you want is found.</h1>
+            <div class="col-4 h4 border-start border-5 border-secondary">
+                <h1>Alen is pharmacy locator enables you to locate a pharmcy where the medicine you want is found.</h1>
             </div>
     
         </div>
