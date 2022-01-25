@@ -26,8 +26,16 @@ public class SecrityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         return http
+        .authorizeRequests()
+                .antMatchers("/admin","/listOfPharmacyAdmin","/listOfUserAdmin","/registerAdmin","/deleteUserAdmin/**","/deletePharmacyAdmin/**").hasAnyAuthority("ADMIN")
+                 .antMatchers("/**").hasAnyAuthority("USER","ADMIN")
+                 
+                 .antMatchers("/","/registerUser").permitAll()
+                .anyRequest().authenticated()
+                .and()
               .formLogin()
               .loginPage("/login")
+              .defaultSuccessUrl("/inTheHome")
         .and()
           .logout()
         .and()
@@ -35,3 +43,7 @@ public class SecrityConfig {
     }
     
 }
+
+   
+    
+
