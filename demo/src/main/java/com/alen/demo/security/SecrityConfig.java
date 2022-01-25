@@ -27,9 +27,10 @@ public class SecrityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         return http
         .authorizeRequests()
-                .antMatchers("/admin").hasAnyAuthority("ADMIN")
-                 .antMatchers("/inTheHome").hasAnyAuthority("USER","ADMIN")
-                 .antMatchers("/","/**").permitAll()
+                .antMatchers("/admin","/listOfPharmacyAdmin","/listOfUserAdmin","/registerAdmin","/deleteUserAdmin/**","/deletePharmacyAdmin/**").hasAnyAuthority("ADMIN")
+                 .antMatchers("/**").hasAnyAuthority("USER","ADMIN")
+                 
+                 .antMatchers("/","/registerUser").permitAll()
                 .anyRequest().authenticated()
                 .and()
               .formLogin()

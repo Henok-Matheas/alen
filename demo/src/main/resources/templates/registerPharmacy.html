@@ -9,30 +9,33 @@
     <div class="container mx-auto w-50">
 
       <form method="POST" th:action="@{/registerPharmacy}" id="registerForm">
-        <label class="form-label" for="username">Username: </label>
-        <input class="form-control" type="text" name="username" id="username" />
-
-        <label class="form-label" for="password">Password: </label>
-        <input
-          class="form-control"
-          type="password"
-          name="password"
-          id="password"
-        />
-
-        <label class="form-label" for="confirm">Confirm password: </label>
-        <input
-          class="form-control"
-          type="password"
-          name="confirm"
-          id="confirm"
-        />
-
-        <label class="form-label" for="email">email: </label>
-        <input class="form-control" type="text" name="email" id="email" />
-
-        <label class="form-label" for="phone">Phone: </label>
-        <input class="form-control" type="text" name="phone" id="phone" />
+        <div th:object="${model}">
+          <!-- <label class="form-label" for="username">name of pharmacy: </label> -->
+          <input class="form-control" type="hidden" name="username" id="username" th:value="${username}" />
+  
+          <!-- <label class="form-label" for="password">Password: </label>
+          <input
+            class="form-control"
+            type="password"
+            name="password"
+            id="password"
+          /> -->
+  
+          <!-- <label class="form-label" for="confirm">Confirm password: </label>
+          <input
+            class="form-control"
+            type="password"
+            name="confirm"
+            id="confirm"
+          /> -->
+  
+          <!-- <label class="form-label" for="email">email: </label> -->
+          <input class="form-control" type="hidden" name="email" id="email" th:value="${email}" />
+  
+          <!-- <label class="form-label" for="phone">Phone: </label> -->
+          <input class="form-control" type="hidden" name="phone" id="phone" th:value="${phone}" />
+        </div>
+       
         <p>address register form </p>
         <label class="form-label" for="address.city">city: </label>
         <input class="form-control" type="text" name="address.city" id="address.city" />

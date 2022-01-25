@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
   <head>
-    <title>alen</title>
+    <title>admin</title>
   </head>
 
   <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
   <body>
     <div class="container mx-auto w-50">
 
-      <form method="POST" th:action="@{/registerUser}" id="registerForm">
+      <form method="POST" th:action="@{/registerAdmin}" id="registerForm">
         <label class="form-label" for="username">Username: </label>
         <input class="form-control" type="text" name="username" id="username" />
 

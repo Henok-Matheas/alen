@@ -23,6 +23,7 @@
                 <label for="password">Password</label>
                 <input type="password" name="password" id="password" class="form-control" placeholder="Password"><br>
                 <input type="submit" value="login" class="btn btn-primary">
+                
                 <div th:if="${error}">
                     Unable to login. Check your username and password.
                   </div>
