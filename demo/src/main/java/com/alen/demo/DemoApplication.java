@@ -1,75 +1,37 @@
 package com.alen.demo;
 
-
-import com.alen.demo.security.RegistrationForm;
-import com.alen.demo.security.User;
-import com.alen.demo.security.UserRepository;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
+// import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.password.PasswordEncoder;
+// import org.springframework.context.annotation.Bean;
 
+import lombok.RequiredArgsConstructor;
 
 @SpringBootApplication
-public class DemoApplication  {
-	// @Autowired
-	// UserRepository userRepo;
-	// @Autowired
-	// RoleRepository repo;
-	// @Autowired
-	// RegistrationForm form;
-	// @Autowired
-	// PasswordEncoder passwordEncoder;
-	// @Autowired
-	// public void run(String...args) throws Exception{
-	// 	repo.save(new Role(1,"ADMIN"));
-	// 	repo.save(new Role(2,"USER"));
-	// 	if(userRepo.findByRole("ADMIN")==null){
-	// 		form.setEmail("admin@universty");
-	// 		form.setRole("ADMIN");
-	// 		form.setPhone("091111");
-	// 		form.setUsername("admin");
-	// 		form.setPassword("1234");
-	// 		User myUser=form.toUsering(passwordEncoder);
-	// 		Role userRole=repo.findByName("ADMIN");
-	// 		myUser.addRole(userRole);
-	
-	// 		userRepo.save(myUser);
-
-	// 	}
-	
+@RequiredArgsConstructor
+public class DemoApplication {
+	public final PharmacyRepository pharmarepo;
 
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
 	}
-	@Bean
-	public CommandLineRunner dataLoader( RoleRepository repo,UserRepository userRepo){
-		return args->{
-			repo.save(new Role(1,"ADMIN"));
-			repo.save(new Role(2,"USER"));
-			// if(userRepo.findByRole("ADMIN")==null){
-			// 	form.setEmail("admin@universty");
-			// 	form.setRole("ADMIN");
-			// 	form.setPhone("091111");
-			// 	form.setUsername("admin");
-			// 	form.setPassword("1234");
-			// 	User myUser=form.toUsering(passwordEncoder);
-			// 	Role userRole=repo.findByName("ADMIN");
-			// 	myUser.addRole(userRole);
-		
-			// 	userRepo.save(myUser);
-	
-			// }
-		};
-	}
-			
 
-			
-	// 	};
+	// @Bean
+	// public CommandLineRunner dataLoad(PharmacyRepository repo) {
+	// return args -> {
+	// repo.save(
+	// new Pharmacy("FLTO", "Flour Tortilla", "password", "++++++232323"));
+	// // new Address(1L, "city", "subcity", "kebele", 123)
+	// };
 	// }
-	
 
+	// @Bean
+	// public CommandLineRunner dataLoader(MedicineRepository repo) {
+	// return args -> {
+	// repo.save(new Medicine(2, "Flour Tortilla", 20.0, 2,
+	// this.pharmarepo.findByEmail("FLTO")));
+	// repo.save(new Medicine(3, "hello", 22.0, 1,
+	// this.pharmarepo.findByEmail("FLTO")));
+	// };
+	// }
 }

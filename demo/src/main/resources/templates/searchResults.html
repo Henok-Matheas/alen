@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search results</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body class="container-fluid">
+    <div class="container text-center row justify-content-center min-vw-100">
+        <h1 class="display-2 text-secondary mt-5" th:text="'Search results for: '+${q}"></h1>
+        <h2 th:text="${medicines == null}?'No medicine was found for your search':'The medicine found with the medicine are'" class="display-5 text-secondary m-5"></h2>
+        <div class="row justify-content-center">
+            <div th:if="${medicines!=null}" class="col-lg-3 col-md-5 container shadow border bg-light h6 text-center mt-5 p-5 m-4 min-w-300" th:each="medicine:${medicines}" style="border-radius: 50px;">
+                <img th:src="@{/images/medicineLogo.jpg}" alt="" class="rounded-pill w-75">
+                <section th:object="${medicine}">
+                    <p th:text="'Medicine name: '+*{name}" class="fw-bold text-primary"></p>
+                    <p th:text="'price: '+*{price}"></p>
+                    <p th:text="'Quantity: '+*{quantity}"></p>
+                    <section th:object="*{pharmacy}">
+                        <p th:text="'Pharamacy name: '+*{name}" class="fw-bold text-primary"></p>
+                        <p th:text="'Phone: '+*{phone}"></p>
+                        <p th:text="'City: '+*{address.city}"></p>
+                        <p th:text="'Subcity: '+*{address.subCity}"></p>
+                        <p th:text="'House no: '+*{address.houseNo}"></p>
+                        <p th:text="'Kebele: '+*{address.kebele}"></p>
+                    </section>
+                </section>
+            </div>
+        </div>
+        <h2 th:text="${pharmacies == null}?'No pharmacy was found for your search':'The pharmacies found with the medicine are'" class="display-5 text-secondary m-5"></h2>
+        <div class="row justify-content-center">
+            <div th:if="${pharmacies!=null}" class="col-lg-3 col-md-5 container shadow border bg-light h6 text-center mt-5 p-5 m-4 min-w-300" th:each="pharmacy:${pharmacies}" style="border-radius: 50px;">
+                <img th:src="@{/images/pharmacyLogo.jpg}" alt="" class="rounded-pill w-75">
+                <section th:object="${pharmacy}">
+                    <p th:text="'Pharamacy name: '+*{name}" class="fw-bold text-primary"></p>
+                    <p th:text="'Phone: '+*{phone}"></p>
+                    <p th:text="'City: '+*{address.city}"></p>
+                    <p th:text="'Subcity: '+*{address.subCity}"></p>
+                    <p th:text="'House no: '+*{address.houseNo}"></p>
+                    <p th:text="'Kebele: '+*{address.kebele}"></p>
+                </section>
+            </div>
+        </div>
+    </div>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

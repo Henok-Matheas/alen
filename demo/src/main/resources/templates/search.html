@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body class="light text-center" style="background-image: linear-gradient(to bottom right,#ffffff,#0275d8 )">
+    <img src="/images/searchBackground.jpg" class="card-img vh-100" alt="background image">
+    <div class="card-img-overlay container">
+        <div class="row vh-100 align-content-center justify-content-center">
+            <section>
+                <h1 class="display-2 text-secondary m-3">Alen</h1>
+                <p class="h5 mb-5">Search for nearest pharmacy with the medicine that you want</p>
+            </section>
+            <form action="/search" method="post" class="text-center col w-50 ">
+                <input type="text" name="q" id="name" class="form-control form-control-lg border-3 m-3" placeholder="Enter medicine name here...">
+                <input type="submit" value="Search" class="btn btn-primary w-25">
+            </form>
+        </div>
+    </div>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>this is update pharmacy page</p>
+    <form th:action="@{/pharmacy/save}" method="POST" th:object="${pharmacy}">
+        <input type="hidden" th:field="*{id}" th:value="*{id}">
+        <input type="text" th:field="*{name}" th:placeholder="*{name}">
+        <!-- <input type="password" th:placeholder="*{password}"> -->
+        <input type="text" th:field="*{phone}" th:placeholder="*{phone}">
+        <input type="submit" value="Submit" class="btn btn-primary w-25 center m-2">
+        <input type="hidden" th:field="*{user.id}" th:value="*{user.id}">
+    </form>
+</body>
+
+</html>
