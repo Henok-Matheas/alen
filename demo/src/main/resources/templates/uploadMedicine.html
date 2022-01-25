@@ -27,8 +27,8 @@
                     <span class="invalid-feedback" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Invalid price</span>
                 </div>
                 <div class="m-3">
-                    <label class="form-label" for="goal"> Quantity: </label><br>
-                    <input th:field="*{quantity}" type="number"
+                    <label class="form-label" for="quantity"> Quantity: </label><br>
+                    <input th:field="*{quantity}" type="number" id="quantity"
                         th:class="|form-control ${#fields.hasErrors('quantity')? 'is-invalid': 'is-valid'}|">
                     <span class="invalid-feedback" th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}">Invalid quantity</span>
                 </div>
