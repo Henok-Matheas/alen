@@ -36,7 +36,7 @@ public class Medicine {
     @Min(value = 1)
     private int quantity;
 
-    @ManyToOne
+    @ManyToOne()
     private Pharmacy pharmacy;
 
 }

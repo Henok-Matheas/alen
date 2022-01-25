@@ -10,11 +10,15 @@ import com.alen.demo.security.UserRepository;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 // import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 
 import lombok.RequiredArgsConstructor;
 
@@ -27,23 +31,45 @@ public class PharmacyController {
 
     public final UserRepository userrepo;
 
-    @GetMapping("user/{id}/pharmacy/create")
-    public String createPharmacy(Model model) {
-        model.addAttribute("pharmacy", new Pharmacy());
+    @GetMapping("user/pharmacy/create")
+    public String createPharmacy(Model model, @AuthenticationPrincipal User user) {
+        Pharmacy pharmacy = new Pharmacy();
+        model.addAttribute("pharmacy", pharmacy);
         return "pharmacyCreate";
     }
 
-    @PostMapping("user/{id}/pharmacy/create")
-    public String processPharmacy(@Valid Pharmacy pharmacy, @PathVariable Integer id, Errors errors) {
-        User user = this.userrepo.findUserById(id);
+    @PostMapping("user/pharmacy/create")
+    public String processPharmacy(
+            @ModelAttribute("pharmacy") @Valid Pharmacy pharmacy, Errors errors,
+            @AuthenticationPrincipal User user) {
+
         if (errors.hasErrors()) {
             return "pharmacyCreate";
         } else if (user == null) {
-            return "home";
+            return "redirect:/login";
+        } else if (this.pharmarepo.findPharmacyByUser(user) != null) {
+            return "pharmacy";
         }
 
+        pharmacy.setAddress(address);
+        this.addressRepo.save(address);
         pharmacy.setUser(user);
         this.pharmarepo.save(pharmacy);
+        return "pharmacy";
+    }
+
+    @PostMapping("/pharmacy/create")
+    public String processPharmacy(@Valid Pharmacy pharmacy, @Valid Address address, Errors errors, Model model,
+            @AuthenticationPrincipal User loggedUser) {
+        if (errors.hasErrors()) {
+            return "pharmacyCreate";
+        } else if (loggedUser == null) {
+            return "home";
+        }
+        pharmacy.setAddress(address);
+        this.addressRepo.save(address);
+        this.pharmarepo.save(pharmacy);
+        model.addAttribute("pharmacy", pharmacy);
         return "pharmacy";
     }
 
@@ -60,7 +86,20 @@ public class PharmacyController {
         return "pharmacy";
     }
 
-    @GetMapping("pharmacy/{id}/update")
+    @GetMapping("user/pharmacy")
+    public String pharmacyPage(@AuthenticationPrincipal User user, Model model) {
+        Pharmacy pharmacy = this.pharmarepo.findPharmacyByUser(user);
+        if (pharmacy == null) {
+            return "error";
+        }
+        model.addAttribute("pharmacy", pharmacy);
+        List<Medicine> medicines = new ArrayList<>();
+        this.medrepo.findMedicineByPharmacy(pharmacy).forEach(i -> medicines.add(i));
+        model.addAttribute("medicines", medicines);
+        return "pharmacy";
+    }
+
+    @GetMapping("pharmacy/update/{id}")
     public String uploadPage(@PathVariable Integer id, Model model) {
         Pharmacy pharmacy = this.pharmarepo.findPharmacyById(id);
         if (pharmacy == null) {
@@ -71,26 +110,31 @@ public class PharmacyController {
     }
 
     @PostMapping("pharmacy/save")
-    public String pharmacyUpdate(@Valid Pharmacy pharmacy, Errors errors) {
+    public String pharmacyUpdate(
+            @ModelAttribute("pharmacy") @Valid Pharmacy pharmacy,
+            Errors errors, RedirectAttributes redirectAttributes) {
         Integer id = pharmacy.getId();
-        String path = "{" + Integer.toString(id) + "}";
         if (errors.hasErrors()) {
             return "updatePharmacy";
         }
         this.pharmarepo.save(pharmacy);
-        return "redirect:/pharmacy/" + path;
+        redirectAttributes.addAttribute("id", id);
+        return "redirect:/pharmacy/{id}";
     }
 
     @GetMapping("/pharmacy/delete/{id}")
     public String deletePharmacy(@PathVariable("id") Integer id, Model model) {
-        pharmarepo.deleteById(id);
-        return "redirect:/user/{id}";
+        Pharmacy pharmacy = this.pharmarepo.findPharmacyById(id);
+        // User user = pharmacy.getUser();
+        this.medrepo.findMedicineByPharmacy(pharmacy).forEach(i -> this.medrepo.deleteById(i.getId()));
+        this.pharmarepo.delete(pharmacy);
+        return "redirect:/user";
     }
 
-    @GetMapping("/medicine/delete/{id}")
-    public String deleteMedicine(@PathVariable("id") Integer id, Model model) {
-        medrepo.deleteById(id);
-        return "redirect:/pharmacy/{id}";
-    }
+    // @GetMapping("/medicine/delete/{id}")
+    // public String deleteMedicine(@PathVariable("id") Integer id, Model model) {
+    // medrepo.deleteById(id);
+    // return "redirect:/pharmacy/{id}";
+    // }
 
 }

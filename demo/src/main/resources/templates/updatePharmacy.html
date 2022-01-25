@@ -10,12 +10,13 @@
 
 <body>
     <p>this is update pharmacy page</p>
-    <form th:action="@{pharmacy/update}" method="POST" th:object="${pharmacy}">
-        <input type="hidden" th:value="*{email}">
-        <input type="text" th:placeholder="*{name}">
-        <input type="password" th:placeholder="*{password}">
-        <input type="text" th:placeholder="*{phone}">
-        <button type="button" class="btn btn-primary">Save changes</button>
+    <form th:action="@{/pharmacy/save}" method="POST" th:object="${pharmacy}">
+        <input type="hidden" th:field="*{id}" th:value="*{id}">
+        <input type="text" th:field="*{name}" th:placeholder="*{name}">
+        <!-- <input type="password" th:placeholder="*{password}"> -->
+        <input type="text" th:field="*{phone}" th:placeholder="*{phone}">
+        <input type="submit" value="Submit" class="btn btn-primary w-25 center m-2">
+        <input type="hidden" th:field="*{user.id}" th:value="*{user.id}">
     </form>
 </body>
 
