@@ -2,14 +2,18 @@ package com.alen.demo;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+
 
 @Controller
-@RequestMapping("/login")
+
 public class loginController {
-    @GetMapping
+    @GetMapping("/login")
     public String displayLogin(){
         return "login";
     }
+    // @GetMapping ("/Pharmacy_login")
+    // public String displayLoginPharmacy(){
+    //     return "loginPharmacy";
+    // }
     
 }
