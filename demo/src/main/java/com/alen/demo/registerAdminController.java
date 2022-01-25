@@ -1,37 +1,38 @@
-package com.alen.demo.security;
+package com.alen.demo;
 
-import com.alen.demo.RoleRepository;
+import com.alen.demo.security.RegistrationForm;
+import com.alen.demo.security.User;
+import com.alen.demo.security.UserRepository;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import com.alen.demo.Role;
 
 @Controller
-@RequestMapping("/registerUser")
-public class RegisterUserController {
+@RequestMapping("/registerAdmin")
+public class registerAdminController {
     private RoleRepository roleRepo;
     private UserRepository userRepo;
     private PasswordEncoder passwordEncoder;
-    public RegisterUserController(UserRepository userRepo,PasswordEncoder passwordEncoder,RoleRepository roleRepo){
+    public registerAdminController(UserRepository userRepo,PasswordEncoder passwordEncoder,RoleRepository roleRepo){
         this.userRepo=userRepo;
         this.passwordEncoder=passwordEncoder;
         this.roleRepo=roleRepo;
     }
     @GetMapping
-    public String registerForm(){
-        return "registerUser";
+    public String registerAdmin(){
+        return "registerAdmin";
     }
+    
     @PostMapping
-    public String registerProcess(RegistrationForm form){
+    public String processAdmin(RegistrationForm form){
         User myUser=form.toUser(passwordEncoder);
-        Role userRole=roleRepo.findByName("USER");
+        Role userRole=roleRepo.findByName("ADMIN");
         myUser.addRole(userRole);
 
         userRepo.save(myUser);
-        return "redirect:/login";
+        return "redirect:/admin";
     }
-    
 }
