@@ -3,12 +3,12 @@ package com.alen.demo;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 // import javax.persistence.OneToOne;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 
 import lombok.AllArgsConstructor;
@@ -17,7 +17,6 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Embeddable
 @AllArgsConstructor
 @NoArgsConstructor
 public class Address {
@@ -40,5 +39,8 @@ public class Address {
     @NotNull
     @Min(value = 1, message = "House number must be greater than or equal to one")
     private int houseNo;
+
+    @OneToOne()
+    private Pharmacy pharmacy;
 
 }

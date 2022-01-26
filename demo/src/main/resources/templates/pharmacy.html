@@ -11,8 +11,8 @@
 
 <body class="bg-light container">
     <div class="d-flex vw-75 justify-content-end">
-        <a th:href="@{|/pharmacy/update/${pharmacy.id}|}" class="btn btn-primary m-3">edit</a>
-        <a th:href="@{|/pharmacy/delete/${pharmacy.id}|}" class="btn btn-primary m-3">delete</a>
+        <a th:href="@{/user/pharmacy/update}" class="btn btn-primary m-3">edit</a>
+        <a th:href="@{/user/pharmacy/delete}" class="btn btn-primary m-3">delete</a>
     </div>
     <div class="container text-center row justify-content-center vw-100">
         <div class="col-lg-8 col-md-11 jusify-content-center">
@@ -21,11 +21,13 @@
                 <section th:if="${pharmacy!=null}" th:object="${pharmacy}" class="h4">
                     <p th:text="'Pharamacy name: '+*{name}" class="fw-bold text-primary display-6"></p>
                     <p th:text="'Phone: '+*{phone}"></p>
-                    <p th:text="'City: '+*{address.city}"></p>
-                    <p th:text="'Subcity: '+*{address.subCity}"></p>
-                    <p th:text="'House no: '+*{address.houseNo}"></p>
-                    <p th:text="'Kebele: '+*{address.kebele}"></p>
                 </section>
+                <div th:object="${address}">
+                    <p th:text="'City: '+*{city}"></p>
+                    <p th:text="'Subcity: '+*{subCity}"></p>
+                    <p th:text="'House no: '+*{houseNo}"></p>
+                    <p th:text="'Kebele: '+*{kebele}"></p>
+                </div>
             </div>
         </div>
         <h1 th:text="${medicines.size()!=0}?'The medicines in the pharmacy are:':'No medicines in the pharmacy'"
@@ -38,10 +40,10 @@
                 th:each="medicine:${medicines}" style="border-radius: 50px;">
                 <div class="d-flex justify-content-end w-100">
                     <div class="w-50">
-                        <button th:href="@{/medicine/update/${medicine.id}}" class="btn" style="width: 35%;"><img
-                                th:src="@{/images/editIcon.png}" class="w-100" alt=""></button>
-                        <button th:href="@{|'/medicine/delete/' ${medicine.id}|}" class="btn" style="width: 35%;"
-                            method="get"><img th:src="@{/images/deleteIcon.png}" class="w-100" alt=""></button>
+                        <a th:href="@{'/medicine/update/' + ${medicine.id}|}" class="btn" style="width: 35%;"
+                            method="get"><img th:src="@{/images/editIcon.png}" class="w-100" alt=""></a>
+                        <a th:href="@{'/medicine/delete/' + ${medicine.id}|}" class="btn" style="width: 35%;"
+                            method="get"><img th:src="@{/images/deleteIcon.png}" class="w-100" alt=""></a>
                     </div>
                 </div>
                 <img th:src="@{/images/medicineLogo.jpg}" alt="" class="rounded-pill w-75 mb-5">

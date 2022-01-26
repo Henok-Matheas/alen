@@ -43,9 +43,6 @@ public class Pharmacy {
     private String phone;
 
     @OneToOne()
-    private Address address;
-
-    @OneToOne()
     private User user;
 
 }

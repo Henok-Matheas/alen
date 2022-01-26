@@ -33,9 +33,6 @@ public class PharmacyController {
     private final MedicineRepository medrepo;
 
     @Autowired
-    private final UserRepository userrepo;
-
-    @Autowired
     private final AddressRepository addressrepo;
 
     @GetMapping("user/pharmacy/create")
@@ -49,11 +46,11 @@ public class PharmacyController {
 
     @PostMapping("user/pharmacy/create")
     public String processPharmacy(
-            @ModelAttribute("pharmacy") @Valid Pharmacy pharmacy,
-            @ModelAttribute("address") @Valid Address address, Errors errors,
+            @ModelAttribute("pharmacy") @Valid Pharmacy pharmacy, Errors errors,
+            @ModelAttribute("address") @Valid Address address, Errors erorrs,
             @AuthenticationPrincipal User user) {
 
-        if (errors.hasErrors()) {
+        if (errors.hasErrors() || erorrs.hasErrors()) {
             return "pharmacyCreate";
         } else if (user == null) {
             return "redirect:/login";
@@ -61,10 +58,11 @@ public class PharmacyController {
             return "pharmacy";
         }
 
-        pharmacy.setAddress(address);
-        this.addressrepo.save(address);
         pharmacy.setUser(user);
+        address.setPharmacy(pharmacy);
         this.pharmarepo.save(pharmacy);
+        this.addressrepo.save(address);
+
         return "redirect:/user/pharmacy";
     }
 
@@ -88,45 +86,54 @@ public class PharmacyController {
             return "error";
         }
         model.addAttribute("pharmacy", pharmacy);
+        Address address = this.addressrepo.findAddressByPharmacy(pharmacy);
+        model.addAttribute("address", address);
         List<Medicine> medicines = new ArrayList<>();
         this.medrepo.findMedicineByPharmacy(pharmacy).forEach(i -> medicines.add(i));
         model.addAttribute("medicines", medicines);
         return "pharmacy";
     }
 
-    @GetMapping("pharmacy/update/{id}")
-    public String uploadPage(@PathVariable Integer id, Model model) {
-        Pharmacy pharmacy = this.pharmarepo.findPharmacyById(id);
+    @GetMapping("user/pharmacy/update")
+    public String updatePharmacyPage(@AuthenticationPrincipal User user, Model model) {
+        Pharmacy pharmacy = this.pharmarepo.findPharmacyByUser(user);
         if (pharmacy == null) {
             return "error";
         }
+        Address address = this.addressrepo.findAddressByPharmacy(pharmacy);
+        model.addAttribute("address", address);
         model.addAttribute("pharmacy", pharmacy);
         return "updatePharmacy";
     }
 
-    @PostMapping("pharmacy/save")
-    public String pharmacyUpdate(
-            @ModelAttribute("pharmacy") @Valid Pharmacy pharmacy,
-            Errors errors, RedirectAttributes redirectAttributes) {
-        Integer id = pharmacy.getId();
-        if (errors.hasErrors()) {
+    @PostMapping("user/pharmacy/update")
+    public String pharmacyUpdate(@ModelAttribute("pharmacy") @Valid Pharmacy pharmacy, Errors errors,
+            @ModelAttribute("address") @Valid Address address,
+            Errors erorrs, @AuthenticationPrincipal User user) {
+
+        if (user == null) {
+            return "error";
+        }
+        if (errors.hasErrors() || erorrs.hasErrors()) {
             return "updatePharmacy";
         }
+        pharmacy.setUser(user);
+        address.setPharmacy(pharmacy);
         this.pharmarepo.save(pharmacy);
-        redirectAttributes.addAttribute("id", id);
-        return "redirect:/pharmacy/{id}";
+        this.addressrepo.save(address);
+        return "redirect:/user/pharmacy";
     }
 
-    @GetMapping("/pharmacy/delete/{id}")
-    public String deletePharmacy(@PathVariable("id") Integer id, Model model, RedirectAttributes redirectAttributes) {
-        Pharmacy pharmacy = this.pharmarepo.findPharmacyById(id);
+    @GetMapping("user/pharmacy/delete")
+    public String deletePharmacy(Model model, @AuthenticationPrincipal User user) {
+        Pharmacy pharmacy = this.pharmarepo.findPharmacyByUser(user);
         if (pharmacy == null) {
             return "redirect:/";
         }
-        Address address = pharmacy.getAddress();
-        this.addressrepo.delete(address);
+        Address address = this.addressrepo.findAddressByPharmacy(pharmacy);
         this.medrepo.findMedicineByPharmacy(pharmacy).forEach(i -> this.medrepo.deleteById(i.getId()));
+        this.addressrepo.delete(address);
         this.pharmarepo.delete(pharmacy);
-        return "redirect:/user/";
+        return "redirect:/user";
     }
 }
