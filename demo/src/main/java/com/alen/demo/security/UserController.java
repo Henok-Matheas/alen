@@ -69,10 +69,10 @@ public class UserController {
             return "home";
         }
         Pharmacy pharmacy = this.pharmrepo.findPharmacyByUser(user);
-        Address address = pharmacy.getAddress();
-        this.addressrepo.delete(address);
+        Address address = this.addressrepo.findAddressByPharmacy(pharmacy);
         this.medrepo.findMedicineByPharmacy(pharmacy).forEach(i -> this.medrepo.deleteById(i.getId()));
         this.pharmrepo.delete(pharmacy);
+        this.addressrepo.delete(address);
         this.userrepo.delete(user);
         return "home";
     }

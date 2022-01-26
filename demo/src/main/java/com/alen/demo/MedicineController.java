@@ -27,6 +27,23 @@ public class MedicineController {
     @Autowired
     private final MedicineRepository medrepo;
 
+    @Autowired
+    private final AddressRepository addressrepo;
+
+    @GetMapping("medicine/{id}")
+    public String medicinePage(@PathVariable Integer id, @AuthenticationPrincipal User user, Model model) {
+        Medicine medicine = this.medrepo.findMedicineById(id);
+        Pharmacy pharmacy = medicine.getPharmacy();
+        Address address = this.addressrepo.findAddressByPharmacy(pharmacy);
+        // if (medicine.getPharmacy().getUser().getUsername() != user.getUsername()) {
+        // return "error";
+        // }
+        model.addAttribute("med", medicine);
+        model.addAttribute("pharmacy", pharmacy);
+        model.addAttribute("address", address);
+        return "medicine";
+    }
+
     @GetMapping("pharmacy/{id}/medicine/create")
     public String medicine(@PathVariable Integer id, Model model) {
         Pharmacy pharmacy = this.pharmarepo.findPharmacyById(id);
@@ -40,7 +57,7 @@ public class MedicineController {
     }
 
     @GetMapping("pharmacy/medicine/create")
-    public String medicine(@AuthenticationPrincipal User user, Model model) {
+    public String medicineCreate(@AuthenticationPrincipal User user, Model model) {
         Pharmacy pharmacy = this.pharmarepo.findPharmacyByUser(user);
         if (pharmacy == null) {
             return "error";
@@ -66,7 +83,7 @@ public class MedicineController {
         return "redirect:/user/pharmacy";
     }
 
-    @GetMapping("medicine/{id}")
+    @GetMapping("medicine/update/{id}")
     public String medicineUpdatePage(@PathVariable("id") Integer id, @AuthenticationPrincipal User user, Model model) {
         Medicine medicine = this.medrepo.findMedicineById(id);
         if (medicine == null) {
@@ -79,14 +96,12 @@ public class MedicineController {
     @PostMapping("medicine/save")
     public String medicineUpdate(
             @ModelAttribute("medicine") @Valid Medicine medicine,
-            Errors errors, RedirectAttributes redirectAttributes) {
-        Integer id = medicine.getId();
+            Errors errors) {
         if (errors.hasErrors()) {
             return "updateMedicine";
         }
         this.medrepo.save(medicine);
-        redirectAttributes.addAttribute("id", id);
-        return "redirect:/medicine/{id}";
+        return "redirect:/user/pharmacy";
     }
 
     @GetMapping("/medicine/delete/{id}")
@@ -98,13 +113,11 @@ public class MedicineController {
         }
 
         Pharmacy pharmacy = medicine.getPharmacy();
-        Integer p_id = pharmacy.getId();
         if (this.pharmarepo.findPharmacyByUser(user) != pharmacy) {
             redirectAttributes.addAttribute("id",
                     this.pharmarepo.findPharmacyByUser(user).getId());
             return "redirect:/user/pharmacy";
         }
-        redirectAttributes.addAttribute("id", p_id);
         this.medrepo.deleteById(id);
         return "redirect:/user/pharmacy";
     }
