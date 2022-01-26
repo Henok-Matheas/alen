@@ -39,3 +39,12 @@ The Websites features
       • The pharmacy’s dashboard contains recently added medication.
       • The user’s dashboard displays nearby pharmacies.
 
+
+
+
+
+Group members
+HENOK MATHEAS    UGR/2553/12      SECTION-2
+KALEABE NEGUSSIE   UGR/3411/12    SECTION-1
+MUSSIE ASAMERE    UGR/1034/12   SECTION-3
+ZERABRUCK MULUNEH   UGR/0492/12   SECTION-1
