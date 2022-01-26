@@ -27,14 +27,23 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         return http
-                .formLogin()
-                .loginPage("/login")
+        .authorizeRequests()
+                .antMatchers("/admin","/listOfPharmacyAdmin","/listOfUserAdmin","/registerAdmin","/deleteUserAdmin/**","/deletePharmacyAdmin/**","/updatePharmacyAdmin/**","/updateUserAdmin").hasAnyAuthority("ADMIN")
+                 .antMatchers("/search","/user","/user/**","/pharmacy/**","/medicine/**","pharmacy/**","user/**").hasAnyAuthority("USER","ADMIN")
+                 
+                 .antMatchers("/","/registerUser","/**").permitAll()
+                .anyRequest().authenticated()
                 .and()
-                .logout()
-                .and()
-                .build();
+              .formLogin()
+              .loginPage("/login")
+              .defaultSuccessUrl("/user")
+        .and()
+          .logout()
+          .logoutSuccessUrl("/")
+        .and()
+        .build();
     }
 
 }

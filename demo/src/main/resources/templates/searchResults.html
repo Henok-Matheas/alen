@@ -15,7 +15,7 @@
             <div th:if="${medicines.size!=0}" class="col-lg-3 col-md-5 container shadow border bg-light h6 text-center mt-5 p-5 m-4 min-w-300" th:each="medicine:${medicines}" style="border-radius: 50px;">
                 <img th:src="@{/images/medicineLogo.jpg}" alt="" class="rounded-pill w-75">
                 <section th:object="${medicine}">
-                    <p th:text="'Medicine name: '+*{name}" class="fw-bold text-primary"></p>
+                    <a th:href="{/medicine/*"></a>
                     <p th:text="'price: '+*{price}"></p>
                     <p th:text="'Quantity: '+*{quantity}"></p>
                     <p th:text="'Pharamacy name: '+*{pharmacy.name}" class="fw-bold text-primary"></p>

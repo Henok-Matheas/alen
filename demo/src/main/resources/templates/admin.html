@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+    
+    <div class="row align-content-center justify-content-center vh-100">
+        <div class="col-6">
+            <a sec:authorize="hasAnyAuthority('ADMIN')" th:href="@{/registerAdmin}" class="btn btn-lg btn-primary m-4 w-100">register admin</a><br>
+            <a sec:authorize="hasAnyAuthority('ADMIN')" th:href="@{/listOfUserAdmin}" class="btn btn-lg btn-primary m-4 w-100">list of user</a><br>
+            <a sec:authorize="hasAnyAuthority('ADMIN')" th:href="@{/listOfPharmacyAdmin}" class="btn btn-lg btn-primary m-4 w-100">list of pharmacy</a>
+        </div>       
+    </div>
+
+    
+</body>
+</html>

@@ -21,9 +21,12 @@
         </div>
     </div>
     <div class="d-flex justify-content-end">
-        <a th:if="${pharmacy==null}" th:href="@{/user/pharmacy/create}" class="btn btn-primary m-0">Add pharmacy</a>
-        <a th:if="${pharmacy!=null}" th:href="@{/user/pharmacy}">pharmacy</a>
-        <a sec:authorize="hasAnyAuthority('ADMIN')" th:href="@{/admin}">admin</a>
+        <a th:if="${pharmacy==null}" th:href="@{/user/pharmacy/create}" class="btn btn-primary m-3">Add pharmacy</a>
+        <a th:if="${pharmacy!=null}" th:href="@{/user/pharmacy}" class="btn btn-primary m-3">pharmacy</a>
+        <a sec:authorize="hasAnyAuthority('ADMIN')" th:href="@{/admin}" class="btn btn-primary m-3">admin</a>
+        <form method="POST" th:action="@{/logout}">
+            <input type="submit" value="Logout" class="btn btn-primary m-3"/>
+        </form>
     </div>
     <div class="row justify-content-center vh-100 align-content-center">
         <div class="h-75 col-lg-3 col-md-5 col-sm-8 container shadow border bg-light h6 text-center mt-5 p-5 m-4 min-w-300"

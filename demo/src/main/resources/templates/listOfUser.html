@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin user</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body class="text-center">
+    <h1 class="display-3 text-primary">Admin dashboard</h1>
+    <h2 class="display-5 text-primary m-5">users</h2>
+    <div th:if="${users.size()!=0}" class="container-fluid">
+        <div class="row vw-100 justify-content-center">
+            <div class="border shadow col-8 m-5 text-start row" th:each="user:${users}" style="border-radius: 20px;">
+                <div class="col-3">
+                    <img th:src="@{/images/userLogo.svg}" alt="" class="w-100 rounded-pill">
+                </div>
+                <section th:object="${user}" class="col-9">
+                    <div class="d-flex justify-content-between w-100">
+                        <h3 class="display-6 d-inline text-info"th:text="*{username}"></h3>
+                        <div>
+                            <form th:action="@{/user/update/*{id}}" method="post" class="btn">
+                                <input type="submit" value="edit" class="bg-primary btn text-light">
+                            </form>
+                            <form th:action="@{/user/delete/*{id}}" method="post" class="btn">
+                                <input type="submit" value="delete"  class="bg-primary btn text-light">
+                            </form>
+                        </div>
+                    </div>
+                    <p class="text-dark" th:text="*{email}"></p>
+                    <p class="text-dark" th:text="*{phone}"></p>
+                </section>
+            </div>
+        </div>
+    </div>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
