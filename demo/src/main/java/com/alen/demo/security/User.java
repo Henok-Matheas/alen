@@ -50,9 +50,6 @@ public class User implements UserDetails {
 
     private final String phone;
 
-    // @NotNull
-    private final String email;
-
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Role> roles = new HashSet<>();
 

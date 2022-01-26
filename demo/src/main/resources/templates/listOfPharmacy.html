@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,36 +8,32 @@
     <title>Admin</title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
 </head>
+
 <body class="text-center vw=100">
     <h1 class="display-3 text-primary">Admin dashboard</h1>
     <h2 class="display-5 text-primary m-5">Pharmacies</h2>
-    <div th:if="${pharmacies.size()!=0}"class="container-fluid">
+    <div th:if="${pharmacies.size()!=0}" class="container-fluid">
         <div class="row vw-100 justify-content-center">
-            <div class="border shadow col-8 m-5 text-start row" th:each="pharmacy:${pharmacies}" style="border-radius: 20px;">
+            <div class="border shadow col-8 m-5 text-start row" th:each="pharmacy:${pharmacies}"
+                style="border-radius: 20px;">
                 <div class="col-3">
                     <img th:src="@{/images/pharmacyLogo.jpg}" alt="" class="w-100 rounded-pill">
                 </div>
                 <section th:object="${pharmacy}" class="col-9">
                     <div class="d-flex justify-content-between w-100">
-                        <h3 class="display-6 d-inline text-info"th:text="*{name}"></h3>
+                        <h3 class="display-6 d-inline text-info" th:text="*{name}"></h3>
                         <div>
-                            <form th:action="@{/pharmacy/update/*{id}}" method="post" class="btn">
-                                <input type="submit" value="edit" class="bg-primary btn text-light">
-                            </form>
-                            <form th:action="@{/pharmacy/delete/*{id}}" method="post" class="btn">
-                                <input type="submit" value="delete"  class="bg-primary btn text-light">
+                            <form th:action="@{/deletePharmacyAdmin + ${pharmacy.id}}" method="post" class="btn">
+                                <input type="submit" value="delete" class="bg-primary btn text-light">
                             </form>
                         </div>
                     </div>
                     <p class="text-dark" th:text="*{phone}"></p>
-                    <p class="text-dark" th:text="*{address.city}"></p>
-                    <p class="text-dark" th:text="*{address.subCity}"></p>
-                    <p class="text-dark" th:text="'kebele: '+*{address.kebele}"></p>
-                    <p class="text-dark" th:text="'house no: '+*{address.houseNo}"></p>
                 </section>
             </div>
         </div>
     </div>
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
+
 </html>

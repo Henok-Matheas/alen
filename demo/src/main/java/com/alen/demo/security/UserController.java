@@ -34,7 +34,7 @@ public class UserController {
     @Autowired
     private final AddressRepository addressrepo;
 
-    @GetMapping("/user")
+    @GetMapping("user")
     public String userpage(@AuthenticationPrincipal User user, Model model) {
         if (user == null) {
             return "home";
@@ -60,21 +60,23 @@ public class UserController {
             return "editUser";
         }
         this.userrepo.save(user);
-        return "editUser";
+        return "redirect:/login";
     }
 
-    @GetMapping("user/delete")
+    @GetMapping("/user/delete")
     public String deleteUser(@AuthenticationPrincipal User user, Model model) {
         if (user == null) {
             return "home";
         }
         Pharmacy pharmacy = this.pharmrepo.findPharmacyByUser(user);
-        Address address = this.addressrepo.findAddressByPharmacy(pharmacy);
-        this.medrepo.findMedicineByPharmacy(pharmacy).forEach(i -> this.medrepo.deleteById(i.getId()));
-        this.pharmrepo.delete(pharmacy);
-        this.addressrepo.delete(address);
+        if (pharmacy != null) {
+            Address address = this.addressrepo.findAddressByPharmacy(pharmacy);
+            this.medrepo.findMedicineByPharmacy(pharmacy).forEach(i -> this.medrepo.deleteById(i.getId()));
+            this.addressrepo.delete(address);
+            this.pharmrepo.delete(pharmacy);
+        }
         this.userrepo.delete(user);
-        return "home";
+        return "redirect:/login";
     }
 
 }
