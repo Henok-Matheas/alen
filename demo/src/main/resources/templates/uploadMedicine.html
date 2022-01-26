@@ -1,40 +1,46 @@
 </html>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upload medicine</title>
-    <link rel="stylesheet" th:href="/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
 </head>
+
 <body class="containter bg-light">
     <div class="row justify-content-center align-content-center vh-100">
         <div class="rounded shadow border-primary col-6 bg-light">
             <h1 class="m-3 display-3 text-primary text-center m-5">Add medicine</h1>
-            <form method="post" th:action="@{create}" th:object="${medicine}"
+            <form method="post" th:action="@{/pharmacy/medicine/create}" th:object="${medicine}"
                 enctype="multipart/form-data">
                 <div class="m-3">
                     <label class="form-label" for="name"> Name: </label><br>
                     <input th:field="*{name}" type="text" id="name"
                         th:class="|form-control ${#fields.hasErrors('name')? 'is-invalid': 'is-valid'}|">
-                    <span class="invalid-feedback" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Invalid name</span>
+                    <span class="invalid-feedback" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Invalid
+                        name</span>
                 </div>
                 <div class="m-3">
                     <label class="form-label" for="price"> Price: </label><br>
                     <input th:field="*{price}" type="text" id="price"
                         th:class="|form-control ${#fields.hasErrors('price')? 'is-invalid': 'is-valid'}|">
-                    <span class="invalid-feedback" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Invalid price</span>
+                    <span class="invalid-feedback" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Invalid
+                        price</span>
                 </div>
                 <div class="m-3">
                     <label class="form-label" for="quantity"> Quantity: </label><br>
                     <input th:field="*{quantity}" type="number" id="quantity"
                         th:class="|form-control ${#fields.hasErrors('quantity')? 'is-invalid': 'is-valid'}|">
-                    <span class="invalid-feedback" th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}">Invalid quantity</span>
+                    <span class="invalid-feedback" th:if="${#fields.hasErrors('quantity')}"
+                        th:errors="*{quantity}">Invalid quantity</span>
                 </div>
                 <input type="submit" value="Submit" class="btn btn-primary center m-3">
             </form>
         </div>
     </div>
 </body>
+
 </html>
