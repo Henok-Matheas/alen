@@ -3,13 +3,13 @@ package com.alen.demo.security;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class RegistrationForm {
 
     @NotBlank
@@ -21,19 +21,16 @@ public class RegistrationForm {
 
     private String phone;
 
-    @NotNull
-    private String email;
-
     private String role;
 
     // private Address address;
     public User toUser(PasswordEncoder encoding) {
-        return new User(username, encoding.encode(password), phone, email);
+        return new User(username, encoding.encode(password), phone);
 
     }
 
     public User toUsering() {
-        return new User(username, password, phone, email);
+        return new User(username, password, phone);
 
     }
     // @Bean
