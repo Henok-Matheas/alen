@@ -1,6 +1,7 @@
 package com.alen.demo.security;
-import javax.persistence.CascadeType;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -28,45 +29,42 @@ import java.util.Set;
 import lombok.AccessLevel;
 import com.alen.demo.Role;
 
-
 @Entity
 @Data
-@NoArgsConstructor(access=AccessLevel.PRIVATE,force=true)
+@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 @RequiredArgsConstructor
 
-
 public class User implements UserDetails {
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @NotBlank
-   @Size(min = 5, message = "Name must be at least 5 characters long")
+    @Size(min = 5, message = "Name must be at least 5 characters long")
+    @Column(unique = true)
     private final String username;
+
+    @NotBlank
+    @Size(min = 5, message = "password must be at least 5 characters long")
     private final String password;
 
     private final String phone;
 
-   @NotNull
+    // @NotNull
     private final String email;
-   
-    @ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<Role> roles=new HashSet<>();
-   
 
-    public void addRole(Role role){
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Role> roles = new HashSet<>();
+
+    public void addRole(Role role) {
         this.roles.add(role);
-        
+
     }
-    
 
-
-   
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities(){
-        List<SimpleGrantedAuthority> authorities=new ArrayList<>();
-        for(Role role:roles){
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        for (Role role : roles) {
             authorities.add(new SimpleGrantedAuthority(role.getName()));
 
         }
@@ -74,20 +72,22 @@ public class User implements UserDetails {
     }
 
     @Override
-    public boolean isAccountNonExpired(){
+    public boolean isAccountNonExpired() {
         return true;
     }
+
     @Override
-    public boolean isAccountNonLocked(){
+    public boolean isAccountNonLocked() {
         return true;
     }
+
     @Override
-    public boolean isCredentialsNonExpired(){
+    public boolean isCredentialsNonExpired() {
         return true;
     }
-    
+
     @Override
-    public boolean isEnabled(){
+    public boolean isEnabled() {
         return true;
     }
 }

@@ -2,9 +2,9 @@ package com.alen.demo.security;
 
 import org.springframework.data.repository.CrudRepository;
 
-public interface UserRepository extends CrudRepository<User, String> {
+public interface UserRepository extends CrudRepository<User, Integer> {
     User findByUsername(String username);
-    User findById(Integer id);
-    //User findByRole(String role);
+
+    User findUserById(Integer id);
 
 }
